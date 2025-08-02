@@ -26,14 +26,14 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            animation: fadeIn 0.4s ease;
+            padding: 15px;
+            animation: fadeIn 0.3s ease;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -45,19 +45,20 @@
         
         .popup-content {
             background: linear-gradient(145deg, rgba(15, 15, 26, 0.95) 0%, rgba(26, 26, 46, 0.9) 100%);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            width: 90vw;
-            height: 85vh;
-            max-width: 1000px;
-            max-height: 700px;
+            border-radius: 16px;
+            width: 80vw;
+            height: 70vh;
+            max-width: 700px;
+            max-height: 500px;
+            min-height: 400px;
             position: relative;
             overflow: hidden;
-            transform: scale(0.8) translateY(50px);
-            animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: scale(0.9) translateY(30px);
+            animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             margin: auto;
         }
         
@@ -68,7 +69,7 @@
         }
         
         .header {
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-between;
@@ -76,50 +77,58 @@
             position: sticky;
             top: 0;
             background: linear-gradient(145deg, rgba(15, 15, 26, 0.95) 0%, rgba(26, 26, 46, 0.9) 100%);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             z-index: 10;
+            min-height: 60px;
         }
         
         .title {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             background: linear-gradient(135deg, #fff 0%, #C4B5FD 50%, #E0E7FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            flex: 1;
+            margin-right: 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
         .close {
             background: none;
             border: none;
             color: #fff;
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
-            padding: 10px;
+            padding: 8px;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
+            transition: all 0.2s ease;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             touch-action: manipulation;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .close:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             transform: rotate(90deg);
         }
         
         .close:active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(0.95);
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0.9);
         }
         
         .body {
             padding: 0;
-            height: calc(85vh - 70px);
+            height: calc(70vh - 60px);
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             display: flex;
@@ -129,10 +138,10 @@
         
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 30px;
-            padding-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            padding-bottom: 40px;
             flex: none;
             align-content: start;
             justify-items: center;
@@ -141,12 +150,12 @@
         }
         
         .photo-item {
-            width: 280px;
-            height: 280px;
-            border-radius: 12px;
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             position: relative;
             background: rgba(0, 0, 0, 0.2);
             touch-action: manipulation;
@@ -154,14 +163,14 @@
         
         .photo-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(122, 102, 204, 0.3);
+            box-shadow: 0 4px 15px rgba(122, 102, 204, 0.3);
         }
         
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             loading: lazy;
         }
         
@@ -184,6 +193,7 @@
             visibility: hidden;
             transition: all 0.3s ease;
             overflow: hidden;
+            padding: 20px;
         }
         
         .lightbox.active {
@@ -193,8 +203,8 @@
         
         .lightbox-content {
             position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 40vw;
+            max-height: 40vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -203,28 +213,33 @@
         .lightbox-img {
             max-width: 100%;
             max-height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
         }
         
         .lightbox-close {
-            position: absolute;
-            top: -60px;
-            right: -10px;
-            background: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
             border: none;
             color: #fff;
-            font-size: 32px;
+            font-size: 24px;
             cursor: pointer;
-            padding: 15px;
+            padding: 12px;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            width: 60px;
-            height: 60px;
+            transition: all 0.2s ease;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             touch-action: manipulation;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         
         .lightbox-close:hover {
@@ -239,15 +254,15 @@
             background: rgba(0, 0, 0, 0.8);
             border: none;
             color: #fff;
-            font-size: 28px;
-            padding: 20px 25px;
+            font-size: 20px;
+            padding: 12px 16px;
             cursor: pointer;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             touch-action: manipulation;
             z-index: 1000;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .nav:hover {
@@ -258,87 +273,34 @@
         
         .nav:active {
             background: rgba(255, 255, 255, 1);
-            transform: translateY(-50%) scale(0.95);
+            transform: translateY(-50%) scale(0.9);
         }
         
         .prev {
-            left: 30px;
+            left: 15px;
         }
         
         .next {
-            right: 30px;
+            right: 15px;
         }
         
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
+            .popup-overlay {
+                padding: 10px;
+            }
+            
             .popup-content {
-                width: 95vw;
-                height: 90vh;
+                width: 85vw;
+                height: 75vh;
                 max-width: none;
                 max-height: none;
-            }
-            
-            .header {
-                padding: 12px 20px;
-            }
-            
-            .title {
-                font-size: 18px;
-            }
-            
-            .close {
-                width: 45px;
-                height: 45px;
-                padding: 8px;
-                font-size: 24px;
-            }
-            
-            .body {
-                height: calc(90vh - 65px);
-            }
-            
-            .photo-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 15px;
-                padding: 20px;
-                padding-bottom: 70px;
-            }
-            
-            .photo-item {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .nav {
-                font-size: 24px;
-                padding: 15px 18px;
-            }
-            
-            .prev {
-                left: 20px;
-            }
-            
-            .next {
-                right: 20px;
-            }
-            
-            .lightbox-close {
-                top: -50px;
-                right: -5px;
-                width: 50px;
-                height: 50px;
-                padding: 10px;
-                font-size: 28px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .popup-content {
-                width: 98vw;
-                height: 95vh;
+                border-radius: 12px;
             }
             
             .header {
                 padding: 10px 15px;
+                min-height: 50px;
             }
             
             .title {
@@ -346,52 +308,159 @@
             }
             
             .close {
-                width: 40px;
-                height: 40px;
-                padding: 6px;
+                width: 36px;
+                height: 36px;
                 font-size: 20px;
+                padding: 6px;
             }
             
             .body {
-                height: calc(95vh - 60px);
+                height: calc(75vh - 50px);
             }
             
             .photo-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 12px;
-                padding: 15px;
-                padding-bottom: 60px;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 8px;
+                padding: 12px;
+                padding-bottom: 30px;
             }
             
             .photo-item {
-                width: 150px;
-                height: 150px;
+                width: 100px;
+                height: 100px;
+                border-radius: 6px;
             }
             
             .nav {
-                font-size: 20px;
-                padding: 12px 15px;
+                font-size: 18px;
+                padding: 10px 14px;
             }
             
             .prev {
-                left: 15px;
+                left: 10px;
             }
             
             .next {
-                right: 15px;
+                right: 10px;
             }
             
             .lightbox-close {
-                top: -40px;
-                right: -5px;
-                font-size: 24px;
-                width: 45px;
-                height: 45px;
+                top: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+                padding: 10px;
+                font-size: 22px;
+            }
+            
+            .lightbox {
+                padding: 15px;
+            }
+            
+            .lightbox-content {
+                max-width: 70vw;
+                max-height: 50vh;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media (max-width: 480px) {
+            .popup-overlay {
                 padding: 8px;
             }
             
-            .popup-overlay {
+            .popup-content {
+                width: 90vw;
+                height: 80vh;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 8px 12px;
+                min-height: 45px;
+            }
+            
+            .title {
+                font-size: 14px;
+            }
+            
+            .close {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+                padding: 4px;
+            }
+            
+            .body {
+                height: calc(80vh - 45px);
+            }
+            
+            .photo-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 6px;
                 padding: 10px;
+                padding-bottom: 25px;
+            }
+            
+            .photo-item {
+                width: 80px;
+                height: 80px;
+                border-radius: 5px;
+            }
+            
+            .nav {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+            
+            .prev {
+                left: 8px;
+            }
+            
+            .next {
+                right: 8px;
+            }
+            
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                padding: 8px;
+            }
+            
+            .lightbox {
+                padding: 10px;
+            }
+            
+            .lightbox-content {
+                max-width: 80vw;
+                max-height: 55vh;
+            }
+        }
+        
+        /* Very Small Devices */
+        @media (max-width: 360px) {
+            .photo-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 5px;
+                padding: 8px;
+            }
+            
+            .photo-item {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .title {
+                font-size: 13px;
+            }
+            
+            .close {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
             }
         }
         
@@ -399,20 +468,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
+            height: 150px;
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
+            grid-column: 1 / -1;
         }
         
         .error {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 200px;
+            height: 150px;
             color: #ff6b6b;
-            font-size: 16px;
+            font-size: 14px;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
+            grid-column: 1 / -1;
+        }
+        
+        /* Safe area for notched devices */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-top: max(12px, env(safe-area-inset-top));
+            }
+            
+            .body {
+                padding-bottom: max(0px, env(safe-area-inset-bottom));
+            }
         }
     </style>
 </head>
