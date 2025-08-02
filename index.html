@@ -15,7 +15,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
-            background: rgba(0, 0, 0, 0.3); /* Dikurangi dari 0.95 ke 0.3 */
+            background: rgba(0, 0, 0, 0.3);
             overflow: hidden;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
@@ -42,48 +42,18 @@
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             will-change: opacity, visibility;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
         .popup-overlay.show {
             opacity: 1;
             visibility: visible;
-            animation: overlayFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
         
         .popup-overlay.hide {
-            animation: overlayFadeOut 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
-        }
-        
-        @keyframes overlayFadeIn {
-            from { 
-                opacity: 0;
-                backdrop-filter: blur(0px);
-                -webkit-backdrop-filter: blur(0px);
-            }
-            to { 
-                opacity: 1;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-            }
-        }
-        
-        @keyframes overlayFadeOut {
-            from { 
-                opacity: 1;
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-            }
-            to { 
-                opacity: 0;
-                backdrop-filter: blur(0px);
-                -webkit-backdrop-filter: blur(0px);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .popup-content {
@@ -92,74 +62,41 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
-            width: 80vw;
+            width: 90vw;
             height: auto;
-            max-width: 700px;
-            max-height: 85vh;
+            max-width: 900px;
+            max-height: 75vh;
             min-height: 300px;
             position: relative;
             overflow: hidden;
             margin: auto;
             will-change: transform, opacity;
-            transform: scale(0.8) translateY(60px) rotateX(15deg);
+            transform: scale(0.7) translateY(100px);
             opacity: 0;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
         .popup-overlay.show .popup-content {
-            transform: scale(1) translateY(0) rotateX(0deg);
+            transform: scale(1) translateY(0);
             opacity: 1;
-            animation: popupSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
         
         .popup-overlay.hide .popup-content {
-            transform: scale(0.8) translateY(60px) rotateX(15deg);
+            transform: scale(0.8) translateY(60px);
             opacity: 0;
-            animation: popupSlideOut 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
-        }
-        
-        @keyframes popupSlideIn {
-            0% {
-                transform: scale(0.8) translateY(60px) rotateX(15deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(0.95) translateY(20px) rotateX(5deg);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1) translateY(0) rotateX(0deg);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes popupSlideOut {
-            0% {
-                transform: scale(1) translateY(0) rotateX(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(0.8) translateY(60px) rotateX(15deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes slideIn {
-            to {
-                transform: scale(1) translateY(0);
-            }
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .header {
             padding: 12px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Ditambah opacity */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            background: linear-gradient(145deg, rgba(15, 15, 26, 0.85) 0%, rgba(26, 26, 46, 0.8) 100%); /* Dikurangi opacity */
+            background: linear-gradient(145deg, rgba(15, 15, 26, 0.85) 0%, rgba(26, 26, 46, 0.8) 100%);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             z-index: 10;
@@ -188,7 +125,7 @@
             cursor: pointer;
             padding: 8px;
             border-radius: 50%;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             width: 40px;
             height: 40px;
             display: flex;
@@ -196,12 +133,12 @@
             justify-content: center;
             touch-action: manipulation;
             flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.15); /* Ditambah opacity */
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .close:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.1);
         }
         
         .close:active {
@@ -212,18 +149,16 @@
         .body {
             padding: 0;
             height: auto;
-            max-height: calc(85vh - 60px);
+            max-height: calc(75vh - 60px);
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             display: flex;
             flex-direction: column;
-            /* Hide scrollbar */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         
-        /* Hide scrollbar for Chrome, Safari and Opera */
         .body::-webkit-scrollbar {
             display: none;
         }
@@ -233,7 +168,7 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
             padding: 20px;
-            padding-bottom: 20px; /* Minimal padding bawah */
+            padding-bottom: 20px;
             flex: none;
             align-content: start;
             justify-items: center;
@@ -244,37 +179,49 @@
         .photo-item {
             width: 150px;
             height: 150px;
-            border-radius: 8px;
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             background: rgba(0, 0, 0, 0.2);
             touch-action: manipulation;
             opacity: 0;
-            transform: translateY(20px);
-            animation: photoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            transform: translateY(30px) scale(0.9);
+            animation: photoFadeIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            will-change: transform, box-shadow;
         }
         
         @keyframes photoFadeIn {
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
         
         .photo-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(122, 102, 204, 0.3);
+            transform: scale(1.25) translateY(-12px);
+            box-shadow: 0 25px 50px rgba(122, 102, 204, 0.6), 0 15px 25px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            filter: brightness(1.1);
+        }
+        
+        .photo-item:active {
+            transform: scale(1.1) translateY(-6px);
+            transition: all 0.15s ease;
         }
         
         .photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             loading: lazy;
-            will-change: auto;
+            will-change: transform;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.15);
         }
         
         .lightbox {
@@ -283,8 +230,8 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.85); /* Dikurangi dari 0.95 ke 0.85 */
-            backdrop-filter: blur(8px); /* Ditambah blur untuk lightbox */
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             z-index: 10000;
             display: flex;
@@ -304,8 +251,8 @@
         
         .lightbox-content {
             position: relative;
-            max-width: 40vw;
-            max-height: 40vh;
+            max-width: 35vw;
+            max-height: 45vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -316,46 +263,52 @@
             max-height: 100%;
             width: auto;
             height: auto;
-            border-radius: 8px;
+            border-radius: 24px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             object-fit: contain;
         }
         
         .lightbox-close {
             position: fixed;
-            top: 30px;
+            top: 80px;
             right: 30px;
-            background: rgba(0, 0, 0, 0.6); /* Dikurangi dari 0.8 ke 0.6 */
-            backdrop-filter: blur(10px); /* Ditambah blur */
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: none;
             color: #fff;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             padding: 12px;
             border-radius: 50%;
-            transition: all 0.2s ease;
-            width: 48px;
-            height: 48px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            touch-action: manipulation;
+            z-index: 10001;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            touch-action: manipulation;
-            z-index: 10001;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
         
         .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .lightbox-close:active {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0.9);
         }
         
         .nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.6); /* Dikurangi dari 0.8 ke 0.6 */
-            backdrop-filter: blur(10px); /* Ditambah blur */
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: none;
             color: #fff;
@@ -363,7 +316,7 @@
             padding: 12px 16px;
             cursor: pointer;
             border-radius: 50%;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             touch-action: manipulation;
             z-index: 1000;
             font-weight: bold;
@@ -373,7 +326,7 @@
         .nav:hover {
             background: rgba(255, 255, 255, 0.9);
             color: #000;
-            transform: translateY(-50%) scale(1.1);
+            transform: translateY(-50%) scale(1.2);
         }
         
         .nav:active {
@@ -389,7 +342,7 @@
             right: 15px;
         }
         
-        /* Performance optimizations for mobile */
+        /* Mobile optimizations */
         @media (max-width: 768px) {
             .popup-overlay {
                 padding: 10px;
@@ -399,9 +352,9 @@
             
             .popup-content {
                 width: 85vw;
-                height: auto; /* Auto height */
+                height: auto;
                 max-width: none;
-                max-height: 90vh; /* Batas maksimal mobile */
+                max-height: 90vh;
                 border-radius: 12px;
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
@@ -424,26 +377,26 @@
             }
             
             .body {
-                height: auto; /* Auto height */
-                max-height: calc(90vh - 50px); /* Batas maksimal */
+                height: auto;
+                max-height: calc(90vh - 50px);
             }
             
             .photo-grid {
                 grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
                 gap: 8px;
                 padding: 12px;
-                padding-bottom: 12px; /* Minimal padding */
+                padding-bottom: 12px;
             }
             
             .photo-item {
                 width: 100px;
                 height: 100px;
-                border-radius: 6px;
-                transition: none;
+                border-radius: 12px;
             }
             
             .photo-item:hover {
-                transform: none;
+                transform: scale(1.15) translateY(-6px);
+                box-shadow: 0 20px 40px rgba(122, 102, 204, 0.5), 0 10px 20px rgba(0, 0, 0, 0.2);
             }
             
             .nav {
@@ -460,12 +413,12 @@
             }
             
             .lightbox-close {
-                top: 20px;
+                top: 70px;
                 right: 20px;
-                width: 44px;
-                height: 44px;
+                font-size: 18px;
                 padding: 10px;
-                font-size: 22px;
+                width: 38px;
+                height: 38px;
             }
             
             .lightbox {
@@ -480,7 +433,6 @@
             }
         }
         
-        /* Small Mobile Devices */
         @media (max-width: 480px) {
             .popup-overlay {
                 padding: 8px;
@@ -488,8 +440,8 @@
             
             .popup-content {
                 width: 90vw;
-                height: auto; /* Auto height */
-                max-height: 95vh; /* Batas maksimal */
+                height: auto;
+                max-height: 95vh;
                 border-radius: 10px;
             }
             
@@ -510,21 +462,26 @@
             }
             
             .body {
-                height: auto; /* Auto height */
-                max-height: calc(95vh - 45px); /* Batas maksimal */
+                height: auto;
+                max-height: calc(95vh - 45px);
             }
             
             .photo-grid {
                 grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
                 gap: 6px;
                 padding: 10px;
-                padding-bottom: 10px; /* Minimal padding */
+                padding-bottom: 10px;
             }
             
             .photo-item {
                 width: 80px;
                 height: 80px;
-                border-radius: 5px;
+                border-radius: 10px;
+            }
+            
+            .photo-item:hover {
+                transform: scale(1.1) translateY(-4px);
+                box-shadow: 0 15px 30px rgba(122, 102, 204, 0.4), 0 8px 15px rgba(0, 0, 0, 0.2);
             }
             
             .nav {
@@ -541,12 +498,12 @@
             }
             
             .lightbox-close {
-                top: 15px;
+                top: 60px;
                 right: 15px;
-                font-size: 20px;
-                width: 40px;
-                height: 40px;
+                font-size: 16px;
                 padding: 8px;
+                width: 32px;
+                height: 32px;
             }
             
             .lightbox {
@@ -559,7 +516,6 @@
             }
         }
         
-        /* Very Small Devices */
         @media (max-width: 360px) {
             .photo-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -605,7 +561,6 @@
             grid-column: 1 / -1;
         }
         
-        /* Safe area for notched devices */
         @supports (padding: max(0px)) {
             .header {
                 padding-top: max(12px, env(safe-area-inset-top));
@@ -680,7 +635,6 @@
         let currentIndex = 0;
         let imageCache = new Map();
         
-        // Preload critical images
         function preloadImage(src) {
             return new Promise((resolve, reject) => {
                 if (imageCache.has(src)) {
@@ -698,7 +652,6 @@
             });
         }
         
-        // Intersection Observer for lazy loading
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -733,7 +686,6 @@
             
             renderPhotos();
             
-            // Preload first few images
             const preloadCount = Math.min(6, currentPhotos.length);
             Promise.all(
                 currentPhotos.slice(0, preloadCount).map(preloadImage)
@@ -749,7 +701,7 @@
             currentPhotos.forEach((photoUrl, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
-                photoItem.style.animationDelay = `${index * 0.05}s`; // Stagger animation
+                photoItem.style.animationDelay = `${index * 0.08}s`;
                 photoItem.onclick = () => openLightbox(index);
                 
                 const img = document.createElement('img');
@@ -757,12 +709,9 @@
                 img.loading = 'lazy';
                 img.classList.add('lazy');
                 
-                // Use intersection observer for better performance
                 if (index < 6) {
-                    // Load first 6 immediately
                     img.src = photoUrl;
                 } else {
-                    // Lazy load the rest
                     img.dataset.src = photoUrl;
                     img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E';
                     imageObserver.observe(img);
@@ -786,7 +735,6 @@
             currentIndex = index;
             const img = document.getElementById('lightboxImg');
             
-            // Show loading state
             img.style.opacity = '0.5';
             
             preloadImage(currentPhotos[index]).then(() => {
@@ -794,7 +742,6 @@
                 img.style.opacity = '1';
                 document.getElementById('lightbox').classList.add('active');
                 
-                // Preload adjacent images
                 const nextIndex = (index + 1) % currentPhotos.length;
                 const prevIndex = (index - 1 + currentPhotos.length) % currentPhotos.length;
                 preloadImage(currentPhotos[nextIndex]);
@@ -815,7 +762,6 @@
                 img.src = currentPhotos[currentIndex];
                 img.style.opacity = '1';
                 
-                // Preload next image
                 const nextIndex = (currentIndex + 1) % currentPhotos.length;
                 preloadImage(currentPhotos[nextIndex]);
             });
@@ -830,7 +776,6 @@
                 img.src = currentPhotos[currentIndex];
                 img.style.opacity = '1';
                 
-                // Preload previous image
                 const prevIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
                 preloadImage(currentPhotos[prevIndex]);
             });
@@ -841,14 +786,13 @@
             overlay.classList.add('hide');
             overlay.classList.remove('show');
             
-            // Wait for animation to complete before sending message
             setTimeout(() => {
                 if (window.parent !== window) {
                     window.parent.postMessage('closePopup', '*');
                 } else {
                     window.close();
                 }
-            }, 300); // Match animation duration
+            }, 400);
         }
         
         function showPopup() {
@@ -857,7 +801,6 @@
             overlay.classList.remove('hide');
         }
         
-        // Event listeners
         document.getElementById('popupOverlay').addEventListener('click', function(e) {
             if (e.target.id === 'popupOverlay') {
                 closePopup();
@@ -880,7 +823,6 @@
             }
         });
         
-        // Optimized touch events
         let touchStartX = 0;
         let touchEndX = 0;
         let touchStartTime = 0;
@@ -897,7 +839,6 @@
                 touchEndX = e.changedTouches[0].screenX;
                 const touchDuration = Date.now() - touchStartTime;
                 
-                // Only handle swipe if it's quick and significant
                 if (touchDuration < 300 && Math.abs(touchEndX - touchStartX) > 50) {
                     handleSwipe();
                 }
@@ -906,17 +847,15 @@
         
         function handleSwipe() {
             if (touchEndX < touchStartX - 50) {
-                nextPhoto(); // Swipe left - next photo
+                nextPhoto();
             }
             if (touchEndX > touchStartX + 50) {
-                prevPhoto(); // Swipe right - previous photo
+                prevPhoto();
             }
         }
         
-        // Throttle scroll events
         let ticking = false;
         function updateScrollPosition() {
-            // Handle scroll if needed
             ticking = false;
         }
         
@@ -927,14 +866,11 @@
             }
         }, { passive: true });
         
-        // Load portfolio on page load
         window.addEventListener('load', function() {
             loadPortfolio();
-            // Show popup with animation after content is loaded
-            setTimeout(showPopup, 50);
+            setTimeout(showPopup, 100);
         });
         
-        // Listen for messages from parent window (Carrd)
         window.addEventListener('message', function(event) {
             if (event.data && event.data.action === 'loadPortfolio') {
                 const client = event.data.client;
@@ -947,7 +883,6 @@
             }
         });
         
-        // Performance monitoring
         if ('performance' in window) {
             window.addEventListener('load', function() {
                 setTimeout(function() {
@@ -958,4 +893,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
