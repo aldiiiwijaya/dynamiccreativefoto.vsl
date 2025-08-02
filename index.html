@@ -27,20 +27,58 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.4); /* Dikurangi dari 0.9 ke 0.4 */
-            backdrop-filter: blur(12px); /* Ditambah blur dari 8px ke 12px */
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 15px;
-            animation: fadeIn 0.2s ease;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            will-change: opacity;
+            opacity: 0;
+            visibility: hidden;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            will-change: opacity, visibility;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .popup-overlay.show {
+            opacity: 1;
+            visibility: visible;
+            animation: overlayFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .popup-overlay.hide {
+            animation: overlayFadeOut 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+        }
+        
+        @keyframes overlayFadeIn {
+            from { 
+                opacity: 0;
+                backdrop-filter: blur(0px);
+                -webkit-backdrop-filter: blur(0px);
+            }
+            to { 
+                opacity: 1;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+        }
+        
+        @keyframes overlayFadeOut {
+            from { 
+                opacity: 1;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+            to { 
+                opacity: 0;
+                backdrop-filter: blur(0px);
+                -webkit-backdrop-filter: blur(0px);
+            }
         }
         
         @keyframes fadeIn {
@@ -55,17 +93,56 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             width: 80vw;
-            height: auto; /* Ubah ke auto */
+            height: auto;
             max-width: 700px;
-            max-height: 85vh; /* Batas maksimal */
-            min-height: 300px; /* Minimum untuk loading state */
+            max-height: 85vh;
+            min-height: 300px;
             position: relative;
             overflow: hidden;
-            transform: scale(0.95) translateY(20px);
-            animation: slideIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             margin: auto;
-            will-change: transform;
+            will-change: transform, opacity;
+            transform: scale(0.8) translateY(60px) rotateX(15deg);
+            opacity: 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .popup-overlay.show .popup-content {
+            transform: scale(1) translateY(0) rotateX(0deg);
+            opacity: 1;
+            animation: popupSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .popup-overlay.hide .popup-content {
+            transform: scale(0.8) translateY(60px) rotateX(15deg);
+            opacity: 0;
+            animation: popupSlideOut 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+        }
+        
+        @keyframes popupSlideIn {
+            0% {
+                transform: scale(0.8) translateY(60px) rotateX(15deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(0.95) translateY(20px) rotateX(5deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1) translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes popupSlideOut {
+            0% {
+                transform: scale(1) translateY(0) rotateX(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.8) translateY(60px) rotateX(15deg);
+                opacity: 0;
+            }
         }
         
         @keyframes slideIn {
@@ -134,13 +211,21 @@
         
         .body {
             padding: 0;
-            height: auto; /* Ubah ke auto */
-            max-height: calc(85vh - 60px); /* Batas maksimal */
+            height: auto;
+            max-height: calc(85vh - 60px);
             overflow-y: auto;
+            overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            /* Hide scrollbar */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .body::-webkit-scrollbar {
+            display: none;
         }
         
         .photo-grid {
@@ -166,6 +251,16 @@
             position: relative;
             background: rgba(0, 0, 0, 0.2);
             touch-action: manipulation;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: photoFadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        @keyframes photoFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .photo-item:hover {
@@ -654,6 +749,7 @@
             currentPhotos.forEach((photoUrl, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
+                photoItem.style.animationDelay = `${index * 0.05}s`; // Stagger animation
                 photoItem.onclick = () => openLightbox(index);
                 
                 const img = document.createElement('img');
@@ -741,12 +837,24 @@
         }
         
         function closePopup() {
-            // Send message to parent window (Carrd)
-            if (window.parent !== window) {
-                window.parent.postMessage('closePopup', '*');
-            } else {
-                window.close();
-            }
+            const overlay = document.getElementById('popupOverlay');
+            overlay.classList.add('hide');
+            overlay.classList.remove('show');
+            
+            // Wait for animation to complete before sending message
+            setTimeout(() => {
+                if (window.parent !== window) {
+                    window.parent.postMessage('closePopup', '*');
+                } else {
+                    window.close();
+                }
+            }, 300); // Match animation duration
+        }
+        
+        function showPopup() {
+            const overlay = document.getElementById('popupOverlay');
+            overlay.classList.add('show');
+            overlay.classList.remove('hide');
         }
         
         // Event listeners
@@ -820,7 +928,11 @@
         }, { passive: true });
         
         // Load portfolio on page load
-        window.addEventListener('load', loadPortfolio);
+        window.addEventListener('load', function() {
+            loadPortfolio();
+            // Show popup with animation after content is loaded
+            setTimeout(showPopup, 50);
+        });
         
         // Listen for messages from parent window (Carrd)
         window.addEventListener('message', function(event) {
@@ -846,4 +958,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
